@@ -6,8 +6,24 @@
 <head>
     <title>@title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/assets/stylesheets/main.css"/>
     </head>
     <body>
-        @content
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">SignUp App</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/">Form</a></li>
+                        <li><a href="/users">All Users</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            @content
+        </div>
     </body>
 </html>

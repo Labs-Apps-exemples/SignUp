@@ -47,7 +47,7 @@ object Application extends Controller with MongoController {
     val cursor: Cursor[User] = collection.find(Json.obj("_id" -> Json.obj("$exists" -> true))).cursor[User]
     val futureUsersList: Future[List[User]] = cursor.collect[List]()
     futureUsersList.map { persons =>
-      Ok(persons.toString())
+      Ok(views.html.list(persons))
     }
   }
 
