@@ -1,14 +1,18 @@
 package controllers
 
+import play.modules.reactivemongo.MongoController
+import play.modules.reactivemongo.json.collection.JSONCollection
 import play.api.Play.current
 import play.api.data.Form
 import play.api.data.Forms._
-
-import models.User
-
 import play.api.mvc.{ Action, Controller }
 
-object Application extends Controller {
+object Application extends Controller with MongoController {
+
+  import models._
+  import models.JsonFormats._
+
+  def collection: JSONCollection = db.collection[JSONCollection]("users")
 
   val userForm = Form(
     mapping(
