@@ -1,4 +1,4 @@
-This is your new Play application
-=================================
+Sign Up App
+========
 
-This file will be packaged with your application, when using `activator dist`.
+Simple app using Play, Scala & MongoDB.
