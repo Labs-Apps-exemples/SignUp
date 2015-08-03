@@ -1,11 +1,19 @@
 package controllers
 
-import play.modules.reactivemongo.MongoController
-import play.modules.reactivemongo.json.collection.JSONCollection
 import play.api.Play.current
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.mvc.{ Action, Controller }
+import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.libs.json._
+
+import scala.concurrent.Future
+
+import play.modules.reactivemongo.MongoController
+import reactivemongo.api.Cursor
+
+import play.modules.reactivemongo.json._
+import play.modules.reactivemongo.json.collection._
 
 object Application extends Controller with MongoController {
 
@@ -32,6 +40,14 @@ object Application extends Controller with MongoController {
         Ok(views.html.success())
       }
     )
+  }
+
+  def findAll = Action.async {
+    val cursor: Cursor[User] = collection.find(Json.obj("_id" -> Json.obj("$exists" -> true))).cursor[User]
+    val futureUsersList: Future[List[User]] = cursor.collect[List]()
+    futureUsersList.map { persons =>
+      Ok(persons.toString())
+    }
   }
 
 }
