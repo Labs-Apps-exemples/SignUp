@@ -37,6 +37,7 @@ object Application extends Controller with MongoController {
     userForm.bindFromRequest.fold(
       formWithErrors => BadRequest(views.html.form(formWithErrors)),
       success => {
+        collection.insert(success)
         Ok(views.html.success())
       }
     )
